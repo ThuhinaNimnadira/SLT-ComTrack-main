@@ -1,0 +1,170 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import 'tailwindcss';
+
+/*
+  SLT Complaint Management & Tracking System (CMTS)
+  Enterprise service-desk design system aligned to Sri Lanka Telecom / SLT Mobitel branding.
+  Brand: deep telecom blue + Mobitel green, on a cool structured neutral ground.
+*/
+
+@theme {
+  --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  /* Brand */
+  --color-slt-blue: #0a4595;
+  --color-slt-blue-dark: #073471;
+  --color-slt-blue-50: #eef4fc;
+  --color-slt-blue-100: #d7e5f7;
+  --color-slt-cyan: #0aa5e0;
+  --color-slt-green: #58a733;
+  --color-slt-green-dark: #3f7f23;
+  --color-slt-green-50: #eef8e7;
+
+  /* Structural neutrals */
+  --color-ground: #f4f6fa;
+  --color-surface: #ffffff;
+  --color-panel: #fafbfd;
+  --color-ink: #10233c;
+  --color-ink-soft: #45566d;
+  --color-ink-faint: #7a889c;
+  --color-line: #e2e8f1;
+  --color-line-strong: #cdd7e5;
+
+  /* Status semantics */
+  --color-st-open: #0a5fbf;
+  --color-st-open-bg: #e5f0fc;
+  --color-st-progress: #b26a00;
+  --color-st-progress-bg: #fdf1dd;
+  --color-st-resolved: #2f7d1f;
+  --color-st-resolved-bg: #e9f6e2;
+  --color-st-closed: #52627a;
+  --color-st-closed-bg: #eef1f6;
+  --color-st-breach: #c02525;
+  --color-st-breach-bg: #fdeaea;
+  --color-st-hold: #6b4bb0;
+  --color-st-hold-bg: #f0eafb;
+
+  --color-ring: #0a4595;
+  --radius-card: 10px;
+  --radius-control: 6px;
+  --shadow-raised: 0 1px 2px rgba(16, 35, 60, 0.05), 0 4px 12px rgba(16, 35, 60, 0.06);
+  --shadow-overlay: 0 24px 64px rgba(16, 35, 60, 0.22);
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --dur-fast: 150ms;
+  --dur-base: 200ms;
+  --dur-slow: 250ms;
+}
+
+:root {
+  --background: var(--color-ground);
+  --foreground: var(--color-ink);
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-ground);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Scrollbars: hidden until scrolling */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+}
+*::-webkit-scrollbar {
+  width: 9px;
+  height: 9px;
+}
+*::-webkit-scrollbar-thumb {
+  background: transparent;
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+*:hover::-webkit-scrollbar-thumb {
+  background: var(--color-line-strong);
+  background-clip: content-box;
+}
+
+::selection {
+  background: var(--color-slt-blue-100);
+  color: var(--color-slt-blue-dark);
+}
+
+/* Numeric tabular alignment for tables and metrics */
+.tnum {
+  font-variant-numeric: tabular-nums;
+}
+
+@keyframes cmts-fade {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-fade {
+  animation: cmts-fade 0.22s ease-out both;
+}
+
+@keyframes cmts-shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+.skeleton {
+  background: linear-gradient(90deg, #eef1f6 25%, #e2e8f1 37%, #eef1f6 63%);
+  background-size: 200% 100%;
+  animation: cmts-shimmer 1.3s ease-in-out infinite;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-ring);
+  outline-offset: 2px;
+}
+@keyframes cmts-pop {
+  from { opacity: 0; transform: translateY(8px) scale(0.985); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes cmts-overlay {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes cmts-slide-in {
+  from { transform: translateX(-100%); }
+  to { transform: none; }
+}
+@keyframes cmts-toast {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
+}
+.animate-pop { animation: cmts-pop var(--dur-slow) var(--ease-standard) both; }
+.animate-overlay { animation: cmts-overlay var(--dur-base) ease-out both; }
+.animate-drawer { animation: cmts-slide-in var(--dur-slow) var(--ease-standard) both; }
+.animate-toast { animation: cmts-toast var(--dur-base) var(--ease-standard) both; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

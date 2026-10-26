@@ -1,0 +1,27 @@
+# Dependencies
+node_modules/
+
+# Production
+dist/
+build/
+
+# Environment
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Caches & Logs
+.cache/
+.vite/
+vite.config.*.timestamp-*
+*.tsbuildinfo
+*.log
+logs/
+*-debug.log*
+.tmp-*
+
+# OS Files
+.DS_Store
+Thumbs.db
